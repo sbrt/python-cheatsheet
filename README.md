@@ -769,11 +769,12 @@ Inline
 ['aa', 'ab', 'ac', ..., 'cc']
 ```
 
-### Map, Filter, Reduce
+### Map, Filter, Reduce, Zip
 ```python
 <iter> = map(lambda x: x + 1, range(10))            # Or: iter([1, 2, ..., 10])
 <iter> = filter(lambda x: x > 5, range(10))         # Or: iter([6, 7, 8, 9])
 <obj>  = reduce(lambda out, x: out + x, range(10))  # Or: 45
+<iter> = zip(<iter1>, <iter2>,...)                  # iterator of tuples. i-tuple = i-th items in each iterator paired together.
 ```
 * **Reduce must be imported from the functools module.**
 
