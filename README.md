@@ -669,8 +669,9 @@ Assignment
 ### Simultaneous Assignment
 ```python
 a,b = b,a                                    # a and b are swapped without the need for a temporary variable.
-                                             # Does not work with parameters of objects, due to loops produced here
-                                             # node1, node1.next = node1.next, ListNode(node2.val, node1.next)
+                                             # Attention with loops:
+                                             # Loop produced:    node1, node1.next = node1.next, ListNode(node1.val, node1.next)
+                                             # No loop produced: node1.next, node1 = ListNode(node2.val, node1.next), node1.next
 ```
 
 
