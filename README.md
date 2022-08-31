@@ -30,7 +30,7 @@ List
 ----
 ```python
 <list> = <list>[<slice>]       # Or: <list>[from_inclusive : to_exclusive : ±step]
-<list>.copy()
+<list>.copy()                  # Copy list, i.e. to avoid modifying passed list inside function 
 ```
 
 ```python
