@@ -669,9 +669,14 @@ Assignment
 ### Simultaneous Assignment
 ```python
 a,b = b,a                                    # a and b are swapped without the need for a temporary variable.
-                                             # Attention with loops:
+                                             # Attention with complex objects:
                                              # Loop produced:    node1, node1.next = node1.next, ListNode(node1.val, node1.next)
-                                             # No loop produced: node1.next, node1 = ListNode(node2.val, node1.next), node1.next
+                                             # No loop produced, but wrong result: node1.next, node1 = ListNode(node2.val, node1.next), node1.next
+                                             # => Temporary variable needed
+                                             # temp = node1.next
+                                             # node1.next = ListNode(node2.val, temp)
+                                             # node1 = temp
+                                             # node2 = node2.next
 ```
 
 
