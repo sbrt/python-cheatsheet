@@ -668,7 +668,9 @@ Assignment
 ---------
 ### Simultaneous Assignment
 ```python
-a,b = b,a                                         # a and b are swapped without the need for a temporary variable
+a,b = b,a                                    # a and b are swapped without the need for a temporary variable.
+                                             # Does not work with parameters of objects, due to loops produced here
+                                             # node1, node1.next = node1.next, ListNode(node2.val, node1.next)
 ```
 
 
