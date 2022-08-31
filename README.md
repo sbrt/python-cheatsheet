@@ -70,6 +70,7 @@ del <list>[<int>]              # Removes item at index without return
 
 Dictionary
 ----------
+from python 3.6 onwards, dict maintains insertion order by default
 ```python
 <view> = <dict>.keys()                          # Coll. of keys that reflects changes.
 <view> = <dict>.values()                        # Coll. of values that reflects changes.
