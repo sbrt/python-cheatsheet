@@ -36,7 +36,6 @@ List
 ```python
 <list>.append(<el>)            # Or: <list> += [<el>]
 <list>.extend(<collection>)    # Or: <list> += <collection>
-<list>.insert(<index>, <el>)   # Or: <list>[<index>:<index>] = [<el>]
 ```
 
 ```python
@@ -59,7 +58,7 @@ list_of_chars    = list(<str>)
 * **Module [operator](#operator) provides functions itemgetter() and mul() that offer the same functionality as [lambda](#lambda) expressions above.**
 
 ```python
-<list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right.
+<list>.insert(<int>, <el>)     # Inserts item at index and moves the rest to the right. Or: <list>[<index>:<index>] = [<el>]
 <el>  = <list>.pop([<int>])    # Removes and returns item at index or from the end.
 <int> = <list>.count(<el>)     # Returns number of occurrences. Also works on strings.
 <int> = <list>.index(<el>)     # Returns index of the first occurrence or raises ValueError.
