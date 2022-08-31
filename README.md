@@ -36,6 +36,7 @@ List
 ```python
 <list>.append(<el>)            # Or: <list> += [<el>]
 <list>.extend(<collection>)    # Or: <list> += <collection>
+<list>.insert(<index>, <el>)   # Or: <list>[<index>:<index>] = [<el>]
 ```
 
 ```python
