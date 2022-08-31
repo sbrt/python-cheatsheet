@@ -92,7 +92,7 @@ value  = <dict>.setdefault(key, default=None)   # Returns and writes default if 
 value = <dict>.pop(key)                         # Removes item or raises KeyError.
 {k for k, v in <dict>.items() if v == value}    # Returns set of keys that point to the value.
 {k: v for k, v in <dict>.items() if k in keys}  # Returns a dictionary, filtered by keys.
-<dict>.update(dict([<key>, 1 if <dict>.get(<key>) is None else <dict>.get(<key>) + 1]))         # Increments a key's value by 1 if key exists, otherwise creates key entry with value 1 
+<dict>[<key>] = <dict>.get(<key>,0) + 1         # Increment a key's value by 1 if key entry exists, otherwise create key entry with value 1 
 ```
 
 ### Counter
