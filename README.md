@@ -226,6 +226,7 @@ Generator
 ---------
 * **Any function that contains a yield statement returns a generator.**
 * **Generators and iterators are interchangeable.**
+* **use lists when you need 1) to access the data multiple times / 2) random or reversed access required / 3) to join strings
 
 ```python
 def count(start, step):
