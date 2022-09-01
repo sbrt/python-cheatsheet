@@ -344,7 +344,8 @@ Optional[<hint>]                                # Optional[List[str]]
 class Starship:
     <var>: <hint>                               # instance variable without value
     <var>: <hint> = <default>                   # instance variable with value
-    <var>: ClassVar[<hint>] = {}                # class variable (shared by all instances).
+    ~~<var>: ClassVar[<hint>] = {}~~            # NOT IN PYTHON 3.8/3.9, maybe was removed
+                                                # class variable (shared by all instances).
                                                 # assignment to class variable in instance
                                                 # flagged as error by a type checker.
                                                 # <hint> cannot be type variable.
