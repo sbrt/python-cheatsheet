@@ -226,7 +226,7 @@ Generator
 ---------
 * **Any function that contains a yield statement returns a generator.**
 * **Generators and iterators are interchangeable.**
-* **use lists when you need 1) to access the data multiple times / 2) random or reversed access required / 3) to join strings
+* **use lists when you need 1) to access the data multiple times / 2) random or reversed access required / 3) to join strings**
 
 ```python
 def count(start, step):
@@ -323,9 +323,9 @@ Optional[<hint>]                                # Optional[List[str]]
 * **Tuple packing allowed**
 * **Variables in tuple unpacking and for/what constructs must be annotated beforehand**
 * **illegal to attempt to annotate variables subject to global or nonlocal in the same function scope**
-* **in functions: default-less notation makes variable always local, preventing unintended use of global variable with same name, when variable not assigned in function scope.
-* **in classes: default-less notation annotates instance variables that should be initialized
-* **in classes: class variable notation annotates variable that cannot be used in instance
+* **in functions: default-less notation makes variable always local, preventing unintended use of global variable with same name, when variable not assigned in function scope.**
+* **in classes: default-less notation annotates instance variables that should be initialized**
+* **in classes: class variable notation annotates variable that cannot be used in instance**
 * **at the module or class level, if the item being annotated is a simple name, then it and the annotation will be stored in the __annotations__ attribute of that module or class**
 
 ```python
