@@ -146,9 +146,12 @@ Tuple
 -----
 **Tuple is an immutable and hashable list.**
 ```python
+# Tuple packing
 <tuple> = ()                                # Empty tuple.
 <tuple> = (<el>,)                           # Or: <el>,
-<tuple> = (<el_1>, <el_2> [, ...])          # Or: <el_1>, <el_2> [, ...]
+<tuple> = (<el_1>, <el_2>[, ...])           # Or: <el_1>, <el_2> [, ...]
+# Tuple unpacking
+<var1>, <var2>[, ...] = <tuple>
 ```
 
 ### Named Tuple
