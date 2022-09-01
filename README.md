@@ -303,38 +303,11 @@ True
 
 Type Hints
 ----------
-```python
-my_var: int
-my_var = 5             # Passes type check.
-other_var: int  = 'a'  # Flagged as error by type checker,
-                       # but OK at runtime.
-a: int
-a: str  # Static type checker may or may not warn about this.
-
-x: NonexistentName     # For local: No error. Interpreter does not evaluate.
-                       # For Module/Class: NameError 
-```
-
-```python
-a: int
-print(a)               # raises NameError
-```
-
-```python
-def f():
-    a: int             # a always local
-    print(a)           # raises UnboundLocalError
-    # Commenting out the a: int makes it a NameError.
-```
 
 * **Types are not are not enforced at runtime (hence 'hints')**
 * **Can be used by third party tools (i.e. IDEs, linters, type checker)**
-* **in functions: default-less notation makes variable always local, preventing unintended use of global variable with same name, when variable not assigned in function scope.
-* **in classes: default-less notation annotates instance variables that should be initialized
-* **in classes: class variable notation annotates variable that cannot be used in instance
-* **at the module or class level, if the item being annotated is a simple name, then it and the annotation will be stored in the __annotations__ attribute of that module or class**
 
-### Hints
+### Hint notation
 ```python
 <type>                                          # bool,bytes,int,float,str
 List[<type>]
@@ -343,14 +316,17 @@ Tuple[<type>, ...]
 "<string>"
 
 Optional[<hint>]                                # Optional[List[str]]
-
 ```
 
 ### Hints for Variables and Arguments 
-* * **No multiple assignment**
+* **No multiple assignment**
 * **Tuple packing allowed**
 * **Variables in tuple unpacking and for/what constructs must be annotated beforehand**
 * **illegal to attempt to annotate variables subject to global or nonlocal in the same function scope**
+* **in functions: default-less notation makes variable always local, preventing unintended use of global variable with same name, when variable not assigned in function scope.
+* **in classes: default-less notation annotates instance variables that should be initialized
+* **in classes: class variable notation annotates variable that cannot be used in instance
+* **at the module or class level, if the item being annotated is a simple name, then it and the annotation will be stored in the __annotations__ attribute of that module or class**
 
 ```python
 # <var> is any valid single assignment target
@@ -375,6 +351,8 @@ def func(<arg>:<hint>, ...) -> <hint>: ...      # def func(y:Dict[x:"hello" = "d
 
 ### Type Alias
 
+* **type alias useful for simplifying complex type signatures**
+
 ```python
 Vector = list[float]                                   # type alias
 
@@ -384,8 +362,32 @@ def scale(scalar: float, vector: Vector) -> Vector:
 # typechecks; a list of floats qualifies as a Vector.
 new_vector = scale(2.0, [1.0, -4.2, 5.4])
 ```
-* **type alias useful for simplifying complex type signatures**
 
+### Type errors
+
+```python
+my_var: int
+my_var = 5             # Passes type check.
+other_var: int  = 'a'  # Flagged as error by type checker,
+                       # but OK at runtime.
+a: int
+a: str                 # Static type checker may or may not warn about this.
+
+x: NonexistentName     # For local: No error. Interpreter does not evaluate.
+                       # For Module/Class: NameError 
+```
+
+```python
+a: int
+print(a)               # raises NameError
+```
+
+```python
+def f():
+    a: int             # a always local
+    print(a)           # raises UnboundLocalError
+                       # Commenting out the a: int makes it a NameError.
+```
 
 
 String
