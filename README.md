@@ -972,9 +972,11 @@ Class
 class <name>:
     def __init__(self, a):
         self.a = a
+    # The goal of __repr__ is to be unambiguous to reconstruct the object, i.e. from error log
     def __repr__(self):
         class_name = self.__class__.__name__
         return f'{class_name}({self.a!r})'
+    # The goal of __str__ is to be readable
     def __str__(self):
         return str(self.a)
 
