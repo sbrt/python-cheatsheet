@@ -332,6 +332,8 @@ Optional[<hint>]                                # Optional[List[str]]
 * **at the module or class level, if the item being annotated is a simple name, then it and the annotation will be stored in the __annotations__ attribute of that module or class**
 
 ```python
+from typing import *                            # part of typing module
+
 # <var> is any valid single assignment target
 <var>: <hint>                                   # module var without initial
 <var>: <hint> = <default>                       # module var with initial value
