@@ -9,14 +9,13 @@ Comprehensive Python Cheatsheet
 Contents
 --------
 **&nbsp;&nbsp;&nbsp;** **1. Collections:** **&nbsp;** **[`List`](#list)**__,__ **[`Dictionary`](#dictionary)**__,__ **[`Set`](#set)**__,__ **[`Tuple`](#tuple)**__,__ **[`Range`](#range)**__,__ **[`Enumerate`](#enumerate)**__,__ **[`Iterator`](#iterator)**__,__ **[`Generator`](#generator)**__.__  
-**&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__ **[`Type_Hints`](#type-hints)**__,__ **[`String`](#string)**__,__ **[`Regular_Exp`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers-1)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
+**&nbsp;&nbsp;&nbsp;** **2. Types:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Type`](#type)**__,__**[`String`](#string)**__,__ **[`Regular_Exp`](#regex)**__,__ **[`Format`](#format)**__,__ **[`Numbers`](#numbers-1)**__,__ **[`Combinatorics`](#combinatorics)**__,__ **[`Datetime`](#datetime)**__.__  
 **&nbsp;&nbsp;&nbsp;** **3. Syntax:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Assignment`](#assignment)**__,__ **[`Args`](#arguments)**__,__ **[`Inline`](#inline)**__,__ **[`Import`](#imports)**__,__ **[`Decorator`](#decorator)**__,__ **[`Class`](#class)**__,__ **[`Duck_Types`](#duck-types)**__,__ **[`Enum`](#enum)**__,__ **[`Exception`](#exceptions)**__.__  
 **&nbsp;&nbsp;&nbsp;** **4. System:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Exit`](#exit)**__,__ **[`Print`](#print)**__,__ **[`Input`](#input)**__,__ **[`Command_Line_Arguments`](#command-line-arguments)**__,__ **[`Open`](#open)**__,__ **[`Path`](#paths)**__,__ **[`OS_Commands`](#os-commands)**__.__  
 **&nbsp;&nbsp;&nbsp;** **5. Data:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`JSON`](#json)**__,__ **[`Pickle`](#pickle)**__,__ **[`CSV`](#csv)**__,__ **[`SQLite`](#sqlite)**__,__ **[`Bytes`](#bytes)**__,__ **[`Struct`](#struct)**__,__ **[`Array`](#array)**__,__ **[`Memory_View`](#memory-view)**__,__ **[`Deque`](#deque)**__.__  
-**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprogramming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__.__  
+**&nbsp;&nbsp;&nbsp;** **6. Advanced:** **&nbsp;&nbsp;&nbsp;**  **[`Threading`](#threading)**__,__ **[`Operator`](#operator)**__,__ **[`Introspection`](#introspection)**__,__ **[`Metaprograming`](#metaprogramming)**__,__ **[`Eval`](#eval)**__,__ **[`Coroutines`](#coroutines)**__,__ **[`Typing`](#typing)**__.__  
 **&nbsp;&nbsp;&nbsp;** **7. Libraries:** **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**  **[`Progress_Bar`](#progress-bar)**__,__ **[`Plot`](#plot)**__,__ **[`Table`](#table)**__,__ **[`Curses`](#curses)**__,__ **[`Logging`](#logging)**__,__ **[`Scraping`](#scraping)**__,__ **[`Web`](#web)**__,__ **[`Profile`](#profiling)**__,__  
 **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** **[`NumPy`](#numpy)**__,__ **[`Image`](#image)**__,__ **[`Audio`](#audio)**__,__ **[`Games`](#pygame)**__,__ **[`Data`](#pandas)**__.__
-
 
 Main
 ----
@@ -301,139 +300,6 @@ True
 | complex            |   yes    |   yes    |          |          |          |
 | decimal.Decimal    |   yes    |          |          |          |          |
 +--------------------+----------+----------+----------+----------+----------+
-```
-
-
-Type Hints
-----------
-
-* **Types are not are not enforced at runtime (hence 'hints')**
-* **Can be used by third party tools (i.e. IDEs, linters, type checker)**
-
-### Hint notation
-```python
-<type>                                          # accepts instance of <type>
-                                                # bool,bytes,int,float,str, List[<type>]
-                                                # Dict[<type>, <type>], Tuple[<type>, ...]
-                                                # <class>
-Type[<type>]                                    # accepts instance/class of <type>
-Union[<type>, ...]                              # accepts any of <type>, ...
-
-"<string>"                                      # annotate variable with string
-                                                # unclear how type checkers handle this
-
-Optional[<hint>]                                # Or: Union[<hint>, None]
-Final[<hint>]                                   # Declaring that a method should not be overridden
-                                                # Declaring that a class should not be subclassed
-                                                # Declaring that a variable or attribute should not be reassigned
-ClassVar[<hint>]                                # Class Variable
-```
-
-### Hints for Variables and Arguments 
-* **No multiple assignment**
-* **Tuple packing allowed**
-* **Variables in tuple unpacking and for/what constructs must be annotated beforehand**
-* **illegal to attempt to annotate variables subject to global or nonlocal in the same function scope**
-* **in functions: default-less notation makes variable always local, preventing unintended use of global variable with same name, when variable not assigned in function scope.**
-* **in classes: default-less notation annotates instance variables that should be initialized**
-* **in classes: class variable notation annotates variable that cannot be used in instance**
-* **at the module or class level, if the item being annotated is a simple name, then it and the annotation will be stored in the __annotations__ attribute of that module or class**
-
-```python
-from typing import *                            # part of typing module
-
-
-
-# <var> is any valid single assignment target
-<var>: <hint>                                   # module var without initial
-<var>: <hint> = <default>                       # module var with initial value
-                                                # allows tuple packing
-                                                # t: Tuple[int, ...] = 1, 2, 3
-<var1>: <hint>                                  # annotate before tuple unpacking 
-<var2>: <hint>
-<var1>, <var2> = (..., ...)
-
-class Starship:
-    <var>: <hint>                               # instance variable without value
-    <var>: <hint> = <default>                   # instance variable with value
-    <var>: ClassVar[<hint>] = {}                # class variable (shared by all instances).
-                                                # assignment to class variable in instance
-                                                # flagged as error by a type checker.
-                                                # <hint> cannot be type variable.
-    <var>: Final[<hint>] = {}                   # type checker should treat "Final" in class body ~ "ClassVar"
-                                                # don't use both "ClassVar" and "Final"
-
-    def func(<arg>:<hint>, ...) -> <hint>: ...  # def func(y:Dict[x:"hello" = "default") -> List[float]: ...
-        <var>: Final[<hint>] = {}
-```
-
-### Type Alias
-
-* **type alias useful for simplifying complex type signatures**
-
-```python
-# type alias
-Vector = list[float]
-
-def scale(scalar: float, vector: Vector) -> Vector:
-    return [scalar * num for num in vector]
-
-# typechecks; a list of floats qualifies as a Vector.
-new_vector = scale(2.0, [1.0, -4.2, 5.4])
-```
-### Generic functions
-
-* **function that accepts some object (any object!) and return another object of the exact same type.**
-
-```python
-T = TypeVar('T')                # Can be anything
-S = TypeVar('S', bound=str)     # Can be any subtype of str. returns as str
-A = TypeVar('A', str, bytes)    # Must be exactly str or bytes
-
-def identity(x: T) -> T:
-    return x
-
-def reverse(x: S) -> S:
-    return x[::-1]
-
-def count(sequence: A, search: A) -> S:
-    return sequence.count(search)
-
-class mystring(str):
-    pass
-
-type(identity(1))                                     # class int
-type(identity("abc"))                                 # class str
-type(reverse("abc"))                                  #str
-type(reverse(mystring("abc")))                        #str
-count("abcdddd", "d")                                 #4
-count(bytes('abcdddd', 'utf-8'), bytes("d", 'utf-8')) #4
-```
-
-### Type errors
-
-```python
-my_var: int
-my_var = 5             # Passes type check.
-other_var: int  = 'a'  # Flagged as error by type checker,
-                       # but OK at runtime.
-a: int
-a: str                 # Static type checker may or may not warn about this.
-
-x: NonexistentName     # For local: No error. Interpreter does not evaluate.
-                       # For Module/Class: NameError 
-```
-
-```python
-a: int
-print(a)               # raises NameError
-```
-
-```python
-def f():
-    a: int             # a always local
-    print(a)           # raises UnboundLocalError
-                       # Commenting out the a: int makes it a NameError.
 ```
 
 
@@ -2520,6 +2386,146 @@ if __name__ == '__main__':
     curses.wrapper(main)
 ```
 <br>
+
+Typing
+----------
+```python
+from typing import *
+```
+
+### Type hints
+* **Types are not are not enforced at runtime (hence 'hints')**
+* **Can be used by third party tools (i.e. IDEs, linters, type checker)**
+* **type alias useful for simplifying complex type signatures**
+
+
+**Hint notation**
+```python
+<type>                                          # accepts instance of <type>
+                                                # bool,bytes,int,float,str, List[<type>]
+                                                # Dict[<type>, <type>], Tuple[<type>, ...]
+                                                # <class>
+Vector = list[float]                            # type alias
+Type[<type>]                                    # accepts instance/class of <type>
+Union[<type>, ...]                              # accepts any of <type>, ...
+
+"<string>"                                      # annotate variable with string
+                                                # unclear how type checkers handle this
+
+Optional[<hint>]                                # Or: Union[<hint>, None]
+Final[<hint>]                                   # Declaring that a method should not be overridden
+                                                # Declaring that a class should not be subclassed
+                                                # Declaring that a variable or attribute should not be reassigned
+ClassVar[<hint>]                                # Class Variable
+```
+
+**Hints for variables, classes, function parameters**
+* **No multiple assignment**
+* **Tuple packing allowed**
+* **Variables in tuple unpacking and for/what constructs must be annotated beforehand**
+* **illegal to attempt to annotate variables subject to global or nonlocal in the same function scope**
+* **in functions: default-less notation makes variable always local, preventing unintended use of global variable with same name, when variable not assigned in function scope.**
+* **in classes: default-less notation annotates instance variables that should be initialized**
+* **in classes: class variable notation annotates variable that cannot be used in instance**
+* **at the module or class level, if the item being annotated is a simple name, then it and the annotation will be stored in the __annotations__ attribute of that module or class**
+
+```python
+# <var> is any valid single assignment target
+<var>: <hint>                                   # module var without initial
+<var>: <hint> = <default>                       # module var with initial value
+                                                # allows tuple packing
+                                                # t: Tuple[int, ...] = 1, 2, 3
+<var1>: <hint>                                  # annotate before tuple unpacking 
+<var2>: <hint>
+<var1>, <var2> = (..., ...)
+
+class Starship:
+    <var>: <hint>                               # instance variable without value
+    <var>: <hint> = <default>                   # instance variable with value
+    <var>: ClassVar[<hint>] = {}                # class variable (shared by all instances).
+                                                # assignment to class variable in instance
+                                                # flagged as error by a type checker.
+                                                # <hint> cannot be type variable.
+    <var>: Final[<hint>] = {}                   # type checker should treat "Final" in class body ~ "ClassVar"
+                                                # don't use both "ClassVar" and "Final"
+
+    def func(<arg>:<hint>, ...) -> <hint>: ...  # def func(y:Dict[x:"hello" = "default") -> List[float]: ...
+        <var>: Final[<hint>] = {}
+```
+
+### Type Alias
+
+
+
+```python
+# type alias
+Vector = list[float]
+
+def scale(scalar: float, vector: Vector) -> Vector:
+    return [scalar * num for num in vector]
+
+# typechecks; a list of floats qualifies as a Vector.
+new_vector = scale(2.0, [1.0, -4.2, 5.4])
+```
+
+
+### Type errors
+
+```python
+my_var: int
+my_var = 5             # Passes type check.
+other_var: int  = 'a'  # Flagged as error by type checker,
+                       # but OK at runtime.
+a: int
+a: str                 # Static type checker may or may not warn about this.
+
+x: NonexistentName     # For local: No error. Interpreter does not evaluate.
+                       # For Module/Class: NameError 
+```
+
+```python
+a: int
+print(a)               # raises NameError
+```
+
+```python
+def f():
+    a: int             # a always local
+    print(a)           # raises UnboundLocalError
+                       # Commenting out the a: int makes it a NameError.
+```
+
+### Generic types
+
+
+### Generic functions
+* **generic function accepts some object (any object!) and returns another object of the exact same type.**
+* **TypeVar creates a binding between the input and output types**
+
+```python
+T = TypeVar('T')                # Can be anything
+S = TypeVar('S', bound=str)     # Can be any subtype of str. returns as str
+A = TypeVar('A', str, bytes)    # Must be exactly str or bytes
+
+def identity(x: T) -> T:
+    return x
+
+def reverse(x: S) -> S:
+    return x[::-1]
+
+def count(sequence: A, search: A) -> S:
+    return sequence.count(search)
+
+class mystring(str):
+    pass
+
+type(identity(1))                                     # class int
+type(identity("abc"))                                 # class str
+type(reverse("abc"))                                  #str
+type(reverse(mystring("abc")))                        #str
+count("abcdddd", "d")                                 #4
+count(bytes('abcdddd', 'utf-8'), bytes("d", 'utf-8')) #4
+```
 
 
 Libraries
