@@ -312,13 +312,21 @@ Type Hints
 
 ### Hint notation
 ```python
-<type>                                          # bool,bytes,int,float,str
-List[<type>]
-Dict[<type>, <type>]
-Tuple[<type>, ...]
-"<string>"
+<type>                                          # accepts instance of <type>
+                                                # bool,bytes,int,float,str, List[<type>]
+                                                # Dict[<type>, <type>], Tuple[<type>, ...]
+                                                # <class>
+Type[<type>]                                    # accepts instance/class of <type>
+Union[<type>, ...]                              # accepts any of <type>, ...
 
-Optional[<hint>]                                # Optional[List[str]]
+"<string>"                                      # annotate variable with string
+                                                # unclear how type checkers handle this
+
+Optional[<hint>]                                # Or: Union[<hint>, None]
+Final[<hint>]                                   # Declaring that a method should not be overridden
+                                                # Declaring that a class should not be subclassed
+                                                # Declaring that a variable or attribute should not be reassigned
+ClassVar[<hint>]                                # Class Variable
 ```
 
 ### Hints for Variables and Arguments 
@@ -334,6 +342,8 @@ Optional[<hint>]                                # Optional[List[str]]
 ```python
 from typing import *                            # part of typing module
 
+
+
 # <var> is any valid single assignment target
 <var>: <hint>                                   # module var without initial
 <var>: <hint> = <default>                       # module var with initial value
@@ -346,13 +356,15 @@ from typing import *                            # part of typing module
 class Starship:
     <var>: <hint>                               # instance variable without value
     <var>: <hint> = <default>                   # instance variable with value
-    <var>: ClassVar[<hint>] = {}                # NOT IN PYTHON 3.8/3.9, maybe was removed
-                                                # class variable (shared by all instances).
+    <var>: ClassVar[<hint>] = {}                # class variable (shared by all instances).
                                                 # assignment to class variable in instance
                                                 # flagged as error by a type checker.
                                                 # <hint> cannot be type variable.
+    <var>: Final[<hint>] = {}                   # type checker should treat "Final" in class body ~ "ClassVar"
+                                                # don't use both "ClassVar" and "Final"
 
-def func(<arg>:<hint>, ...) -> <hint>: ...      # def func(y:Dict[x:"hello" = "default") -> List[float]: ...
+    def func(<arg>:<hint>, ...) -> <hint>: ...  # def func(y:Dict[x:"hello" = "default") -> List[float]: ...
+        <var>: Final[<hint>] = {}
 ```
 
 ### Type Alias
