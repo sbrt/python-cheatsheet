@@ -372,13 +372,42 @@ class Starship:
 * **type alias useful for simplifying complex type signatures**
 
 ```python
-Vector = list[float]                                   # type alias
+# type alias
+Vector = list[float]
 
 def scale(scalar: float, vector: Vector) -> Vector:
     return [scalar * num for num in vector]
 
 # typechecks; a list of floats qualifies as a Vector.
 new_vector = scale(2.0, [1.0, -4.2, 5.4])
+```
+### Generic functions
+
+* **function that accepts some object (any object!) and return another object of the exact same type.**
+
+```python
+T = TypeVar('T')                # Can be anything
+S = TypeVar('S', bound=str)     # Can be any subtype of str. returns as str
+A = TypeVar('A', str, bytes)    # Must be exactly str or bytes
+
+def identity(x: T) -> T:
+    return x
+
+def reverse(x: S) -> S:
+    return x[::-1]
+
+def count(sequence: A, search: A) -> S:
+    return sequence.count(search)
+
+class mystring(str):
+    pass
+
+type(identity(1))                                     # class int
+type(identity("abc"))                                 # class str
+type(reverse("abc"))                                  #str
+type(reverse(mystring("abc")))                        #str
+count("abcdddd", "d")                                 #4
+count(bytes('abcdddd', 'utf-8'), bytes("d", 'utf-8')) #4
 ```
 
 ### Type errors
