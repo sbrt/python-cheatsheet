@@ -2411,6 +2411,9 @@ Union[<type>, ...]                              # accepts any of <type>, ...
 
 "<string>"                                      # annotate variable with string
                                                 # unclear how type checkers handle this
+Callable[..., <output-type>]                    # <output> = Any => Callable
+                                                # Callable takes any number and type of arguments (...)
+                                                # returns a value of any type <output-type>
 
 Optional[<hint>]                                # Or: Union[<hint>, None]
 Final[<hint>]                                   # Declaring that a method should not be overridden
