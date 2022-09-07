@@ -2447,9 +2447,9 @@ class Callback(Protocol):
 
 # Use it like this
 def handler(cb: Callback) -> None:
-    cb('a', 'b', 'c')
+    return cb('a', 'b', 'c')
 def callback(*args: str) -> None:      
-    pass
+    return args[0]
 handler(callback)
 ```
 
