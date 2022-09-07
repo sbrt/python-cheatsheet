@@ -2421,16 +2421,29 @@ Final[<hint>]                                   # Declaring that a method should
                                                 # Declaring that a variable or attribute should not be reassigned
 ClassVar[<hint>]                                # Class Variable
 ```
-### Callable accepting any number of same value arguments**
-
-                                       # callback(a: str, b: str) -> None: 
-
+### Protocol
 ```python
 from typing_extensions import Protocol # Python 3.5-3.7
 from typing import Protocol            # Python >3.8
+```
 
+```python
+### Callable accepting any number of same value arguments
+class IntCallable(Protocol):
+    def __call__(self, *args: int) -> float: ...
+
+
+def f() -> IntCallable:
+    def g(*args: int) -> float:
+        assert all(type(x) == int for x in args)
+        return 0.1
+    return g
+```
+
+```python
+### Handler/Callback
 class Callback(Protocol):
-    def __call__(self, *args: str) -> <out>: ...
+    def __call__(self, *args: str) -> None: ...
 
 # Use it like this
 def handler(cb: Callback) -> None:
@@ -2440,7 +2453,7 @@ def callback(*args: str) -> None:
 handler(callback)
 ```
 
-**Note: callable has to take variadic arguments. The following won't work.**
+**Note: callback has to take variadic arguments. The following won't work.**
 ```python
 def callback(a: str, b: str) -> None:
     pass
