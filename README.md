@@ -204,7 +204,7 @@ Iterator
 
 ### Itertools
 ```python
-from itertools import count, repeat, cycle, chain, islice
+from itertools import count, repeat, cycle, chain, islice, accumulate
 ```
 
 ```python
@@ -214,6 +214,7 @@ from itertools import count, repeat, cycle, chain, islice
 ```
 
 ```python
+<iter> = accumulate(<coll>)                 # Partials sum: accumulate([1,2,3,4,5]) --> 1 3 6 10 15
 <iter> = chain(<coll_1>, <coll_2> [, ...])  # Empties collections in order (figuratively).
 <iter> = chain.from_iterable(<coll>)        # Empties collections inside a collection in order.
 ```
